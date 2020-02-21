@@ -7,8 +7,9 @@ const totp = async (secret) => {
 
 /* HMAC-based OTP */
 const hotp = async (secret, counter) => {
-    //
-    const generateKey = async (secret, counter) => {
+
+    // Uint8Array(20)
+    const hmac = async (secret, counter) => {
         const keyData = Uint8Array.from(base32.decode.asBytes(secret));
         const key     = await crypto.subtle.importKey(
             'raw',
@@ -17,26 +18,29 @@ const hotp = async (secret, counter) => {
             false,
             ['sign']
         );
-        return crypto.subtle.sign('HMAC', key, padCounter(counter));
+        
+        return Uint8Array.from(
+            crypto.subtle.sign('HMAC', key, padCounter(counter))
+        );
     }
 
-    // returns Uint8Array(8)
+    // Uint8Array(8)
     const padCounter = (counter) => {
         const pairs = counter.toString(16).padStart(16, '0').match(/..?/g);
         const array = pairs.map(v => parseInt(v, 16));
         return Uint8Array.from( array );
     }
 
-    //
+    // Number
     function truncate(hs) {
         const offset = hs[19] & 0b1111;
         return ((hs[offset] & 0x7f) << 24) | (hs[offset + 1] << 16) | (hs[offset + 2] << 8) | hs[offset + 3];
     }
 
-    const key = await generateKey(secret, counter);
+    // HOTP(K, C) = truncate(HMAC(K, C))
+    const num = truncate( await hmac(secret, counter) );
 
-    const num = truncate(new Uint8Array(key));
-
+    // return 6 digits, padded with leading zeros
     return num.toString().padStart(6, '0').slice(-6);
 }
 
