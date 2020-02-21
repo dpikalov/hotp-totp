@@ -18,9 +18,9 @@ const hotp = async (secret, counter) => {
             false,
             ['sign']
         );
-        
-        return Uint8Array.from(
-            crypto.subtle.sign('HMAC', key, padCounter(counter))
+
+        return new Uint8Array(
+            await crypto.subtle.sign('HMAC', key, padCounter(counter))
         );
     }
 
