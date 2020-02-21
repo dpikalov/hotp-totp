@@ -1,0 +1,23 @@
+{
+  "name": "hotp-totp",
+  "version": "1.0.0",
+  "description": "Generate One-Time passwords in JS using WebCrypto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "otp",
+    "totp",
+    "hotp",
+    "2FA",
+    "google",
+    "authenticator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dpikalov/hotp-totp.git"
+  },
+  "author": "dpikalov",
+  "license": "MIT"
+}
