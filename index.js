@@ -1,11 +1,11 @@
 import base32 from 'hi-base32';
 
-/**/
+/* Time-based OTP */
 const totp = async (secret) => {
     return hotp( secret, Math.floor( +new Date() / 30000 ) );
 }
 
-/**/
+/* HMAC-based OTP */
 const hotp = async (secret, counter) => {
     //
     const generateKey = async (secret, counter) => {
@@ -17,12 +17,10 @@ const hotp = async (secret, counter) => {
             false,
             ['sign']
         );
-
-        // ArrayBuffer(8)
         return crypto.subtle.sign('HMAC', key, padCounter(counter));
     }
 
-    //
+    // returns Uint8Array(8)
     const padCounter = (counter) => {
         const pairs = counter.toString(16).padStart(16, '0').match(/..?/g);
         const array = pairs.map(v => parseInt(v, 16));
