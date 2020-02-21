@@ -1,6 +1,6 @@
 {
   "name": "hotp-totp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate One-Time passwords in JS using WebCrypto",
   "main": "index.js",
   "scripts": {
