@@ -19,5 +19,8 @@
     "url": "git://github.com/dpikalov/hotp-totp.git"
   },
   "author": "dpikalov",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "hi-base32": "^0.5.0"
+  }
 }
