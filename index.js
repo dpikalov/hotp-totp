@@ -1,4 +1,4 @@
-import base32 from 'hi-base32';
+import base32 from 'thirty-two';
 
 /* Time-based OTP */
 const totp = async (secret) => {
@@ -10,7 +10,7 @@ const hotp = async (secret, counter) => {
 
     // Uint8Array(20)
     const hmac = async (secret, counter) => {
-        const keyData = Uint8Array.from(base32.decode.asBytes(secret));
+        const keyData = Uint8Array.from(base32.decode(secret));
         const key     = await crypto.subtle.importKey(
             'raw',
             keyData,
