@@ -8,10 +8,12 @@ Generate One-Time passwords in JS using WebCrypto
 ## Usage
 
 ```
+// Time-based one-time password
 await totp('SECRETSECRET')
 ```
 
 ```
+// HMAC-based one-time password
 await hotp('SECRETSECRET', 0 /* counter */) #=> 977742
 ```
 
