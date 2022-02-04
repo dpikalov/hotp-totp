@@ -1,6 +1,6 @@
 {
   "name": "hotp-totp",
-  "version": "1.0.6",
+  "version": "1.1.6",
   "description": "Generate One-Time passwords in JS using WebCrypto",
   "main": "index.js",
   "scripts": {
@@ -19,8 +19,5 @@
     "url": "git://github.com/dpikalov/hotp-totp.git"
   },
   "author": "dpikalov",
-  "license": "MIT",
-  "dependencies": {
-    "thirty-two": "^1.0.2"
-  }
+  "license": "MIT"
 }
