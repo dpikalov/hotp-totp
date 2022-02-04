@@ -25,6 +25,7 @@ const b32ToHex = (base32) => {
     return hex
 }
 
+/* Time-based OTP */
 export const totp = async (secret) => {
     return hotp(secret, Math.floor(+new Date() / 30000))
 }
