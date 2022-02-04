@@ -1,3 +1,5 @@
+// https://github.com/dpikalov/hotp-totp
+
 const hexToBuf = (hex) => {
     const bytes = []
     for (let c = 0; c < hex.length; c += 2)
