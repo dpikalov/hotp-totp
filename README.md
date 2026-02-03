@@ -1,6 +1,6 @@
 # hotp-totp
 [![npm install](https://img.shields.io/npm/l/hotp-totp)](https://npmjs.com/package/hotp-totp)
-![npm size](https://img.shields.io/bundlephobia/minzip/hotp-totp)
+![NPM Unpacked Size](https://img.shields.io/npm/unpacked-size/hotp-totp)
 [![npm install](https://img.shields.io/npm/dm/hotp-totp)](https://npmjs.com/package/hotp-totp)
 
 
