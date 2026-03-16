@@ -1,16 +1,40 @@
-import base32 from 'thirty-two';
+// https://github.com/dpikalov/hotp-totp
+
+const hexToBuf = (hex) => {
+    const bytes = []
+    for (let c = 0; c < hex.length; c += 2)
+        bytes.push(parseInt(hex.substr(c, 2), 16))
+    return new Uint8Array(bytes)
+}
+
+const b32ToHex = (base32) => {
+    const base32chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'
+    let bits = ''
+    let hex = ''
+
+    for (let i = 0; i < base32.length; i++) {
+        let val = base32chars.indexOf(base32.charAt(i).toUpperCase())
+        bits += val.toString(2).padStart(5, '0')
+    }
+
+    for (let i = 0; i + 4 <= bits.length; i += 4) {
+        let chunk = bits.substring(i, i + 4)
+        hex += parseInt(chunk, 2).toString(16)
+    }
+    return hex
+}
 
 /* Time-based OTP */
-const totp = async (secret) => {
-    return hotp( secret, Math.floor( +new Date() / 30000 ) );
+export const totp = async (secret) => {
+    return hotp(secret, Math.floor(+new Date() / 30000))
 }
 
 /* HMAC-based OTP */
-const hotp = async (secret, counter) => {
-
+export const hotp = async (secret, counter) => {
     // Uint8Array(20)
     const hmac = async (secret, counter) => {
-        const keyData = Uint8Array.from(base32.decode(secret));
+        // const keyData = Uint8Array.from(secret.split('').map((e) => parseInt(e, 32)))
+        const keyData = hexToBuf(b32ToHex(secret))
         const key     = await crypto.subtle.importKey(
             'raw',
             keyData,
